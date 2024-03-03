@@ -1,0 +1,22 @@
+<%- include("./partials/header.ejs") %>
+
+<div class="wrapper">
+    <div class="content rounded">
+        <form method="post" action="/user/verifyotp" class="d-flex flex-column">
+            <img class="mb-4" src="/assets/user.svg" alt="user" width="72" height="57">
+
+            <h1 class="h3 mb-3 fw-normal">Please enter OTP</h1>
+
+            <input type="email" name="username" id="email" value="<%= email %>" hidden>
+
+            <div class="form mb-3">
+              <input type="number" class="form-control" name="otp">
+            </div>
+
+            <button class="btn btn-primary w-80 py-2" type="submit">Verify</button>
+
+          </form>
+    </div>
+</div>
+
+<%- include("./partials/footer.ejs") %>
