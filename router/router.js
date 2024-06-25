@@ -1,11 +1,13 @@
 import express from "express";
 const router = express.Router();
 
-import 
-{   
+import {
     renderHomePage,
     renderLoginPage,
     loginUser,
+    renderForgotPasswordPage,
+    postForgotPassword,
+    resetPassword,
     renderSignupPage,
     verifyOtp,
     signupUser,
@@ -22,6 +24,12 @@ router.get("/login", renderLoginPage);
 
 router.post("/login", loginUser)
 
+router.get("/forgot-password", renderForgotPasswordPage)
+
+router.post("/forgot-password", postForgotPassword)
+
+router.post("/reset-password", resetPassword)
+
 router.get("/signup", renderSignupPage);
 
 router.post("/signup", signupUser);
@@ -35,7 +43,7 @@ router.get("/login/google", loginWithGoogle);
 router.get("/auth/google/secrets", authenticateWithGoogle);
 
 router.get("/result", displayResultPage);
-        
+
 router.get("/logout", logoutUser);
 
 export default router;

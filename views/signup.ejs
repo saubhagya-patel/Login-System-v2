@@ -1,43 +1,58 @@
-<%- include("./partials/header.ejs") %>
+<%- include("./partials/headerV2.ejs") %>
 
-<div class="wrapper">
-    <div class="content rounded">
-        <form method="post" action="/user/signup" class="d-flex flex-column">
-            <img class="mb-4" src="/assets/user.svg" alt="user" width="72" height="57">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-12 col-md-8 col-lg-6">
+        <div class="wrapper">
+          <div class="content rounded">
+            <form method="post" action="/user/signup" class="d-flex flex-column">
+              <img class="mb-4 mx-auto d-block" src="/assets/user.svg" alt="user" width="72" height="57">
 
-            <% if (locals.message) { %>
-              <h1 class="h3 mb-3 fw-normal"><%= message %></h1>
-            <% }else{ %>
-              <h1 class="h3 mb-3 fw-normal">Please sign up</h1>
-            <% } %>
-        
-            <div class="form-floating">
-              <input type="text" class="form-control" id="floatingInput" placeholder="Name like 'Saubhagya Patel'" name="name">
-              <label for="floatingInput">Full Name</label>
+              <% if (locals.message) { %>
+                <h1 class="h3 mb-3 fw-normal text-center">
+                  <%= message %>
+                </h1>
+                <% } else { %>
+                  <h1 class="h3 mb-3 fw-normal text-center">Please sign up</h1>
+                  <% } %>
+
+                    <div class="form-floating mb-3">
+                      <input type="text" class="form-control" id="floatingInput1"
+                        placeholder="Name like 'Saubhagya Patel'" name="name">
+                      <label for="floatingInput1">Full Name</label>
+                    </div>
+
+                    <div class="form-floating mb-3">
+                      <input type="email" class="form-control" id="floatingInput2" placeholder="name@example.com"
+                        name="username">
+                      <label for="floatingInput2">Email address</label>
+                    </div>
+
+                    <div class="form-floating mb-3">
+                      <input type="password" class="form-control" id="password" placeholder="Password" name="password">
+                      <label for="password">Password</label>
+                    </div>
+
+                    <div class="form-floating mb-3">
+                      <input type="password" class="form-control" id="confirm" placeholder="Confirm password"
+                        name="confirmPassword">
+                      <label for="confirm">Confirm Password</label>
+                    </div>
+
+                    <button class="btn btn-primary w-100 py-2" type="submit">Sign up</button>
+            </form>
+
+            <hr class="featurette-divider">
+
+            <div>
+              <a class="btn btn-primary w-100 py-2" href="/user/login/google">
+                Continue with Google <i class="fab fa-google"></i>
+              </a>
             </div>
-
-            <div class="form-floating">
-              <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com" name="username">
-              <label for="floatingInput">Email address</label>
-            </div>
-
-            <div class="form-floating mb-3">
-              <input type="password" class="form-control" id="floatingPassword" placeholder="Password" name="password">
-              <label for="floatingPassword">Password</label>
-            </div>
-        
-            <button class="btn btn-primary w-80 py-2" type="submit">Sign up</button>
-
-          </form>
-
-          <hr class="featurette-divider">
-
-          <div>
-            <a class="btn btn-primary w-100 py-2" href="/user/login/google">
-              Continue with Google <i class="fab fa-google"></i>
-            </a>
           </div>
+        </div>
+      </div>
     </div>
-</div>
+  </div>
 
-<%- include("./partials/footer.ejs") %>
+  <%- include("./partials/footerV2.ejs") %>

@@ -2,7 +2,7 @@ import env from "dotenv";
 env.config();
 import pg from "pg";
 
-const db=new pg.Client({
+const db = new pg.Client({
     user: process.env.PG_USER,
     host: process.env.PG_HOST,
     database: process.env.PG_DATABASE,
@@ -14,7 +14,7 @@ db.connect();
 const User = {
     async findByEmail(email) {
         try {
-            const result = await db.query("SELECT * FROM users WHERE email=$1;",[email]);
+            const result = await db.query("SELECT * FROM users WHERE email=$1;", [email]);
             return result;
         } catch (error) {
             console.error("Error searching user:", error);
@@ -34,10 +34,20 @@ const User = {
 
     async delete(email) {
         try {
-            const result = await db.query("DELETE FROM users WHERE email=$1;",[email]);
+            const result = await db.query("DELETE FROM users WHERE email=$1;", [email]);
             return result;
         } catch (error) {
-            console.error("Error searching user:", error);
+            console.error("Error deleting user:", error);
+            throw error;
+        }
+    },
+
+    async updatePassword({ email, hash }) {
+        try {
+            const result = await db.query("UPDATE users SET password=$1 WHERE email=$2 RETURNING *;", [hash, email]);
+            return result;
+        } catch (error) {
+            console.error("Error updating otp:", error);
             throw error;
         }
     }

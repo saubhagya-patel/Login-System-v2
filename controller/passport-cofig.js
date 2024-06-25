@@ -41,31 +41,31 @@ passport.use("local",
     }))
 
 
-passport.use("google", 
+passport.use("google",
     new GoogleStrategy({
         clientID: process.env.GOOGLE_CLIENT_ID,
         clientSecret: process.env.GOOGLE_CLIENT_SECRET,
         callbackURL: "http://localhost:3000/user/auth/google/secrets",
         userProfileURL: "https://googleapis.com/oauth2/v3/userinfo",
-}, async (accessToken, refreshToken, profile, cb) => {
-    // console.log(profile);
-    try {
-        const result = await User.findByEmail(profile.email);
-        if(result.rows.length === 0) {
-            const newUser = await User.create({
-                name: profile.displayName,
-                email: profile.email,
-                hash: "google",
-                otp: 111111,
-            });
-            cb(null, newUser.rows[0]);
-        }else {
-            // already existing user 
-            cb(null, result.rows[0])
+    }, async (accessToken, refreshToken, profile, cb) => {
+        // console.log(profile);
+        try {
+            const result = await User.findByEmail(profile.email);
+            if (result.rows.length === 0) {
+                const newUser = await User.create({
+                    name: profile.displayName,
+                    email: profile.email,
+                    hash: "google",
+                    otp: 111111,
+                });
+                cb(null, newUser.rows[0]);
+            } else {
+                // already existing user 
+                cb(null, result.rows[0])
+            }
+        } catch (error) {
+            cb(error);
         }
-    } catch (error) {
-        cb(error);
-    }
     })
 )
 

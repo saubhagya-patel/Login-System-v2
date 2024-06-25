@@ -9,8 +9,8 @@ import session from "express-session";
 
 import router from "./router/router.js"
 
-const app=express();
-const port=3000;
+const app = express();
+const port = 3000;
 
 app.use(express.static("public"));
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -30,8 +30,8 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.use("/user",router);
+app.use("/user", router);
 
-app.listen(port,() => {
-    console.log(`server is listening at https://localhost:${port}`);
+app.listen(port, () => {
+    console.log(`server is listening at http://localhost:${port}`);
 })

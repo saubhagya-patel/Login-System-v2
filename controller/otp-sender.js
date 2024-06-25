@@ -3,10 +3,10 @@ import dotenv from 'dotenv';
 dotenv.config();
 import nodemailer from "nodemailer";
 
-const generateOtp=function() {
-    const max=999999;
-    const min=111111;
-    let otp = Math.floor(Math.random()*(max-min+1)) + min;
+const generateOtp = function () {
+    const max = 999999;
+    const min = 111111;
+    let otp = Math.floor(Math.random() * (max - min + 1)) + min;
     return otp;
 }
 
@@ -25,13 +25,13 @@ async function initiateMail(transporter, mail) {
     try {
         const otp = generateOtp();
         await transporter.sendMail({
-                from: {
-                    name: 'Saubhagya Patel',
-                    address: 'patelsaubhagya0144@gmail.com'
-                },
-                to: mail,
-                subject: "OTP verification for app",
-                text: `
+            from: {
+                name: 'Saubhagya Patel',
+                address: 'patelsaubhagya0144@gmail.com'
+            },
+            to: mail,
+            subject: "OTP verification for app",
+            text: `
                     Hello User,
 
                     Thank you for using our service! Your One-Time Password (OTP) is: ${otp}
@@ -40,7 +40,7 @@ async function initiateMail(transporter, mail) {
                     
                     If you did not request this OTP or have any concerns, please contact our support team immediately.
                 `,
-                html: `
+            html: `
                 <!DOCTYPE html>
                     <html lang="en">
                     <head>
@@ -60,15 +60,71 @@ async function initiateMail(transporter, mail) {
                     </body>
                     </html>
                 `,
-            });
+        });
         return otp;
     } catch (error) {
         console.log(error)
+        return -1;
     }
 }
 
-export async function sendMail (mail) {
+async function initiatePasswordResetMail(transporter, mail) {
+    try {
+        const otp = generateOtp();
+        await transporter.sendMail({
+            from: {
+                name: 'Saubhagya Patel',
+                address: 'patelsaubhagya0144@gmail.com'
+            },
+            to: mail,
+            subject: 'Password Reset OTP',
+            text: `
+Hello,
+
+You are receiving this email because a password reset request was made for your account. If you did not make this request, please ignore this email.
+
+Your OTP (One Time Password) for password reset is: ${otp}
+
+This OTP is valid for 5 minutes.
+
+Thank you,
+Saubhagya Patel
+`,
+            html: `
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Password Reset OTP</title>
+</head>
+<body>
+    <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
+        <h1>Hello,</h1>
+        <p>You are receiving this email because a password reset request was made for your account. If you did not make this request, please ignore this email.</p>
+        <p>Your OTP (One Time Password) for password reset is:</p>
+        <p style="font-size: 24px; font-weight: bold; color: #007bff;">${otp}</p>
+        <p>This OTP is valid for 5 minutes.</p>
+        <p>Thank you,<br>Saubhagya Patel</p>
+    </div>
+</body>
+</html>
+`,
+        });
+        return otp;
+    } catch (error) {
+        console.log(error);
+        return -1;
+    }
+}
+
+
+export async function sendMail(mail) {
     const otp = await initiateMail(transporter, mail);
-    // console.log(`the otp sent to mail is = ${otp}`);
+    return otp;
+}
+
+export async function sendPasswordResetOtp(passwordResetMail) {
+    const otp = await initiatePasswordResetMail(transporter, passwordResetMail);
     return otp;
 }

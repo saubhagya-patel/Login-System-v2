@@ -1,44 +1,44 @@
 <%- include("./partials/header.ejs") %>
 
-<div class="wrapper">
+  <div class="wrapper">
     <div class="content rounded">
-        <form method="post" action="/user/login" class="d-flex flex-column">
-            <img class="mb-4" src="/assets/user.svg" alt="user" width="72" height="57">
-            
-            <% if (locals.message) { %>
-              <h1 class="h3 mb-3 fw-normal"> <%= message %> </h1>
-            <% }else { %>
-              <h1 class="h3 mb-3 fw-normal">Please enter user details</h1>
+      <form method="post" action="/user/login" class="d-flex flex-column">
+        <img class="mb-4" src="/assets/user.svg" alt="user" width="72" height="57">
+
+        <% if (locals.message) { %>
+          <h1 class="h3 mb-3 fw-normal">
+            <%= message %>
+          </h1>
+          <% }else { %>
+            <h1 class="h3 mb-3 fw-normal">Please enter user details</h1>
             <% }%>
-        
-            <div class="form-floating">
-              <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com" name="username">
-              <label for="floatingInput">Email address</label>
-            </div>
-            <div class="form-floating mb-3">
-              <input type="password" class="form-control" id="floatingPassword" placeholder="Password" name="password">
-              <label for="floatingPassword">Password</label>
-            </div>
-        
-            <button class="btn btn-primary w-80 py-2" type="submit">Sign in</button>
 
-          </form>
-          <hr class="featurette-divider">
-          <!-- <div>
-            <button class="btn btn-primary w-100 py-2" type="submit">
-              Continue with Google <i class="fab fa-google"></i>
-            </button>
-          </div> -->
-          <div>
-            <a class="btn btn-primary w-100 py-2" href="/user/login/google">
-              Continue with Google <i class="fab fa-google"></i>
-            </a>
-          </div>
-          <hr class="featurette-divider">
-          <div>
-            <a href="/user/signup" class="btn btn-primary w-100 py-2">New User? Sign Up instead!</a>
-          </div>
+              <div class="form-floating mb-2">
+                <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com"
+                  name="username">
+                <label for="floatingInput">Email address</label>
+              </div>
+              <div class="form-floating mb-3">
+                <input type="password" class="form-control" id="floatingPassword" placeholder="Password"
+                  name="password">
+                <label for="floatingPassword">Password</label>
+              </div>
+
+              <button class="btn btn-primary w-80 py-2" type="submit">Sign in</button>
+
+      </form>
+      <hr class="featurette-divider">
+      <div>
+        <a class="btn btn-primary w-100 py-2" href="/user/login/google">
+          Continue with Google <i class="fab fa-google"></i>
+        </a>
+      </div>
+      <hr class="featurette-divider">
+      <div class="d-flex gap-2 flex-column flex-lg-row">
+        <a href="/user/signup" class="btn btn-primary w-100 py-2">New User? Sign Up instead!</a>
+        <a href="/user/forgot-password" class="btn btn-primary w-100 py-2">Forgot Password</a>
+      </div>
     </div>
-</div>
+  </div>
 
-<%- include("./partials/footer.ejs") %>
+  <%- include("./partials/footer.ejs") %>
